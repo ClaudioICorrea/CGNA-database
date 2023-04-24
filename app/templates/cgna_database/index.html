@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}
+    Inicio
+{% endblock %}
+{% block content %}
+<div class='hero'>
+    <div class='hero-content'>
+        <h2>Search</h2>
+        <form class='content-form' method='post' action='{{ url_for('cgna_database.search_genes')}}'> 
+            <input class = 'input full-width' name='name' placeholder='ID gene or name..' required/>
+            <select class = 'select full-width' id="Opciones" name="opciones">
+                <option value="m">option 1</option>
+                <option value="f">option 2</option>
+                <option value="o">option 3</option> </select>
+            <button class = 'btn full-width'>Buscar</button>
+        </form>
+        <div class="content-form">
+            
+        </div>
+    </div> 
+</div>
+{% include 'cgna_database/section-first.html' %}
+{% include 'cgna_database/section-second.html' %} 
+{% endblock %}

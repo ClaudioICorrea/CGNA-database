@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<title>{% block title %}{% endblock %} - CGNA-database </title>
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style.css')}}"><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&family=Rufina&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+
+<body>
+    <header>
+        <div class='logo'> CGNA </div>
+        <nav>
+            <ul>
+                <li><a href='{{ url_for('cgna_database.index') }}'>Inicio</a></li>
+                <li><a href='{{ url_for('cgna_database.index') }}'>Tutorials</a></li>
+                <li><a href='{{ url_for('cgna_database.index') }}'>All genomes</a></li>
+                <li><a href='{{ url_for('cgna_database.index') }}'>Tools</a></li>
+                <li><a href='{{ url_for('cgna_database.index') }}'>Downloads</a></li>
+                <li><a href='{{ url_for('cgna_database.index') }}'>Help & Docs</a></li>
+                <li><a href='{{ url_for('cgna_database.index') }}'>Blog</a></li>
+                <li><a href='{{ url_for('cgna_database.index') }}'>Login/Register</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section> {% block content %}{% endblock %}</section>
+</body>
+
+<footer>
+    <div class="footer">
+        <div class ='center full-width'>
+            <div class ='row'>
+                El Centro de Recursos de Bioinformática CGNA proporciona soporte para estos organismos. Este proyecto está financiado por CGNA
+            </div>
+        </div>
+        <div class='made-by'>
+            <div class="row">
+                <p>Hecho por Claudio I. Correa Barría - Version 1</p>
+            </div>
+        </div>
+    </div>
+</footer>
