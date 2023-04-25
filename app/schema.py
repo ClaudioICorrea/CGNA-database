@@ -6,8 +6,8 @@ instructions = [
         CREATE TABLE flat (
             id INT PRIMARY KEY AUTO_INCREMENT,
             name VARCHAR(50) UNIQUE NOT NULL,
-            description VARCHAR(10000) NOT NULL,
-            sequence VARCHAR(10000) NOT NULL
+            description VARCHAR(100) NOT NULL,
+            sequence VARCHAR(100) NOT NULL
         )
     """
 ]
