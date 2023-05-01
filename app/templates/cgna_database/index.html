@@ -7,11 +7,15 @@
     <div class='hero-content'>
         <h2>Search</h2>
         <form class='content-form' method='post' action='{{ url_for('cgna_database.search_genes')}}'> 
-            <input class = 'input full-width' name='name' placeholder='ID gene or name..' required/>
-            <select class = 'select full-width' id="Opciones" name="opciones">
-                <option value="m">option 1</option>
-                <option value="f">option 2</option>
-                <option value="o">option 3</option> </select>
+            <input class = 'input full-width' name='name_genes' placeholder='ID gene or name..' required/>
+            <select class = 'select full-width' id="Opciones" name="specie" placeholder="specie">
+                <option value="1">Homo sapiens </option>
+            </select>
+
+            <select class = 'select full-width' id="Opciones" name="chromosomes" placeholder="chromosomes">
+                    <option value="1">chromosome 1</option>
+                    <option value="2">chromosome 2</option>
+                    <option value="3">chromosome 3</option> </select>    
             <button class = 'btn full-width'>Buscar</button>
         </form>
         <div class="content-form">
@@ -19,6 +23,6 @@
         </div>
     </div> 
 </div>
-{% include 'cgna_database/section-first.html' %}
-{% include 'cgna_database/section-second.html' %} 
+{% include 'cgna_database/index/section-first.html' %}
+{% include 'cgna_database/index/section-second.html' %} 
 {% endblock %}
