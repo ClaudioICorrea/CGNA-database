@@ -1,5 +1,5 @@
 html {
-    font-family: 'Rufina',sans-serif;
+    font-family: 'Rufina', sans-serif;
 }
 
 body {
@@ -7,6 +7,7 @@ body {
     margin: 0;
     color: #034d6c
 }
+
 a {
     transition: color 0.3s ease;
     font-family: 'Rubik', sans-serif;
@@ -57,7 +58,7 @@ html body nav ul li a {
     display: flex;
     padding: 20px 50px;
     justify-content: center;
-    align-self: center ;
+    align-self: center;
 }
 
 .hero .hero-content {
@@ -73,10 +74,10 @@ html body nav ul li a {
     padding: 20px 30px;
 }
 
-.hero .hero-content h2{
+.hero .hero-content h2 {
     display: flex;
     justify-content: center;
-    font-family: 'Rufina',sans-serif;
+    font-family: 'Rufina', sans-serif;
     font-size: 30px;
     font-weight: 700;
     margin-bottom: 10px;
@@ -98,7 +99,7 @@ html body nav ul li a {
 }
 
 .hero h1 {
-    font-family: 'Rufina',sans-serif;
+    font-family: 'Rufina', sans-serif;
     font-size: 40px;
     font-weight: 700;
     margin-bottom: 0;
@@ -106,15 +107,16 @@ html body nav ul li a {
 }
 
 .hero h2 {
-    font-family: 'Rufina',sans-serif;
+    font-family: 'Rufina', sans-serif;
     font-size: 25px;
     font-weight: 700;
     margin-bottom: 10px;
     margin-top: 0;
 }
+
 .left {
     width: 600px;
-    align-self: center ;
+    align-self: center;
 }
 
 
@@ -148,13 +150,18 @@ a.btn {
     justify-content: center;
 }
 
-.content{
+.content {
     width: 1200px;
 }
 
 .row {
     display: flex;
     flex-direction: row;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
 }
 
 .card {
@@ -165,19 +172,38 @@ a.btn {
     padding: 20px 30px;
 }
 
-.four{
+.four {
     margin-left: 10px;
     width: 300px;
 }
 
-.footer{
+.footer {
     margin-top: 400px;
     padding: 80px 0 0 0;
     background-color: #333;
     color: #fff;
 }
 
-.made-by{
+.made-by {
     padding: 0 30px;
     color: #555;
+}
+
+.login_box {
+    width: 300px;
+    margin-top: 20px;
+    padding: 20px 20px 20px 20px;
+    background-color: #fff;
+    color: #034d6c;
+    border: solid 1px #ddd;
+    border-radius: 5px;
+}
+
+.login_box .content_login_box {
+    background-color: #fff;
+    margin: 10px;
+}
+
+.login_box .content_login_box .login_form input {
+    margin-bottom: 10px;
 }
