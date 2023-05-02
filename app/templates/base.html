@@ -24,7 +24,12 @@
                 <li><a href="{{ url_for('cgna_database.index') }}">Downloads</a></li>
                 <li><a href="{{ url_for('cgna_database.index') }}">Help & Docs</a></li>
                 <li><a href="{{ url_for('cgna_database.index') }}">Blog</a></li>
+                {% if g.user %}
+                <li><a href="{{ url_for('cgna_database.index') }}">{{g.user['username']}}</a></li>
+                <li><a href = "{{ url_for('auth.logout') }}">Logout</a></li>
+                {% else %}
                 <li><a href="{{ url_for('cgna_database._login') }}">Login/Register</a></li>
+                {% endif %}   
             </ul>
         </nav>
     </header>

@@ -204,6 +204,30 @@ a.btn {
     margin: 10px;
 }
 
-.login_box .content_login_box .login_form input {
+.login_form input {
     margin-bottom: 10px;
+}
+
+.login_form input {
+    margin-bottom: 10px;
+}
+
+.login_form .submit {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    font-family: 'Rufina', sans-serif;
+    font-size: 20px;
+}
+
+.warning {
+    font-family: 'Rufina', sans-serif;
+    font-size: 13px;
+    color: #EC131B;
 }

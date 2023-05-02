@@ -27,23 +27,25 @@ def register():
         db, c = get_db()
         c.execute("SELECT id FROM user WHERE username = %s", (username,))
         if not username:
-            error = "Nombre usuario es requerido"
+            error = "username required"
         if not password:
-            error = "Password es requerido"
+            error = "password required"
         elif c.fetchone() is not None:
-            error = "Usuario {} se encuentra registrado.".format(username)
+            error = "the username {} is already register.".format(username)
         if error is None:
             c.execute(
                 "INSERT INTO user (username, password) values (%s, %s)",
                 (username, generate_password_hash(password)),
             )
             db.commit()
-            return redirect(url_for("cgna_database._login"))
+            session.clear()
+            return redirect(url_for("auth.login"))
     return render_template("cgna_database/auth/register.html", error=error)
 
 
 @bp.route("/login", methods=["GET", "POST"])
 def login():
+    session.clear()
     error = ""
     if request.method == "POST":
         error = None
@@ -53,11 +55,10 @@ def login():
         c.execute("SELECT * FROM user where username = %s", (username,))
         user = c.fetchone()
         if user is None:
-            error = "Usuario inválido"
+            error = "Invalid username or password"
         elif not check_password_hash(user["password"], password):
-            error = "contraseña inválida"
+            error = "Invalid username or password"
         if error is None:
-            print("estube aqui !!!")
             session.clear()
             session["user_id"] = user["id"]
             return redirect(url_for("cgna_database.index"))

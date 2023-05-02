@@ -41,11 +41,18 @@ def search_genes():
             db, c = get_db()
             id_specie = int(specie) if specie else None
             id_chromosome = int(chromosome) if chromosome else None
-            c.execute(
-                "insert into queries (id_specie, id_chromosome, name_gen, created_by)"
-                " values (%s,%s,%s,%s)",
-                (id_specie, id_chromosome, name_genes, 1),
-            )
+            if g.user:
+                c.execute(
+                    "insert into queries (id_specie, id_chromosome, name_gen, created_by)"
+                    " values (%s,%s,%s,%s)",
+                    (id_specie, id_chromosome, name_genes, g.user["id"]),
+                )
+            else:
+                c.execute(
+                    "insert into queries (id_specie, id_chromosome, name_gen, created_by)"
+                    " values (%s,%s,%s,%s)",
+                    (id_specie, id_chromosome, name_genes, 1),
+                )
             db.commit()
             return render_template("cgna_database/show_genes.html")
     return redirect(url_for("cgna_database.index"))
