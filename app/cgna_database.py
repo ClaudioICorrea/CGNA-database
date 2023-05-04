@@ -1,12 +1,4 @@
-from flask import (
-    Blueprint,
-    render_template,
-    request,
-    redirect,
-    url_for,
-    current_app,
-    g,
-    flash,
+from flask import ( Blueprint, render_template, request, redirect, url_for, current_app, g, flash,
 )
 
 bp = Blueprint("cgna_database", __name__, url_prefix="/")
