@@ -57,5 +57,7 @@ instructions = [
             FOREIGN KEY fk_id_chromosome(id_chromosome) REFERENCES chromosomes(id_chromosome)
         );
     """,
+    "INSERT INTO user (username,password) VALUES ('default_user','1234');"
+    ,
     "INSERT INTO species (specie) VALUES ('Arabidopsis_thaliana');",
 ]

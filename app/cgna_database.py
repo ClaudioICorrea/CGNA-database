@@ -48,3 +48,19 @@ def search_genes():
             db.commit()
             return render_template("cgna_database/show_genes.html")
     return redirect(url_for("cgna_database.index"))
+
+@bp.route("/show_genes", methods=["GET","POST"])
+def show_genes():
+    ## mostrar algo en pantalla 
+    ## recuperar la ultima consulta
+    ## busqueda de la consulta en la base de datos  en el orden specie-> chromosoma -> genes
+    ## segun lo encontrado mostrar de forma ordenada la información   
+    
+    #db, c = get_db()
+    #c.execute(
+    #    'SELECT t.id, t.created_at, t.description, u.username, t.completed'
+    #    ' FROM todo t JOIN user u on t.created_by = u.id where'
+    #    ' t.created_by = %s ORDER BY created_at desc', (g.user['id'],)
+    #)
+    #luke = c.fetchall()
+    return render_template('todo/index.html', todos=luke)
