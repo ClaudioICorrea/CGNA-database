@@ -44,11 +44,14 @@ instructions = [
     """,
     """
         CREATE TABLE genes (
-            id_genes INT PRIMARY KEY AUTO_INCREMENT,
+            id_genes VARCHAR(255) PRIMARY KEY NOT NULL,
             id_chromosome VARCHAR(255) NOT NULL,
+            bio_type VARCHAR(255),
             start INT(11) NOT NULL,
             end INT(11) NOT NULL,
+            score  VARCHAR(255),
             strand VARCHAR(255),
+            frame VARCHAR(255),
             size INT(11),
             name_gen VARCHAR(255),
             FOREIGN KEY fk_id_chromosome(id_chromosome) REFERENCES chromosomes(id_chromosome)

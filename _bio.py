@@ -49,6 +49,29 @@ for line in content_ggf:
         )
         zelda.commit()
     result = re.search(r"ID=gene:(\w+);",line) 
+    if result is not None:
+        id_gene =  result.group(1)
+        line_aux=line.split()
+        fk_id_chromosome= line_aux[0]
+        source_gene = line_aux[1]
+        bio_type = line_aux[2]
+        start_gene =line_aux[3]
+        end_gene =line_aux[4]
+        score_gene = line_aux[5]
+        size_gene = int(end_gene) - int(start_gene)
+        strand_gene= line_aux[6]
+        frame_gene = line_aux[7]
+        description_gene = line_aux[8]
+        if re.search(r"logic_name=",description_gene) is not None:
+            aux = re.search(r"logic_name=(\w+)",description_gene) 
+            name_gene = aux.group(1)
+        else:
+            name_gene = None    
+        link.execute(
+            "INSERT INTO genes (id_genes,id_chromosome,bio_type,start,end,score,strand,frame,size,name_gen) values (%s, %s,%s,%s,%s,%s, %s,%s,%s,%s)",
+            (id_gene,fk_id_chromosome,bio_type,start_gene,end_gene,score_gene,strand_gene,frame_gene,size_gene,name_gene)
+        )
+        
 link.close()
 zelda.close()                
         
