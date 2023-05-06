@@ -1,5 +1,4 @@
 import mysql.connector
-
 import click
 
 from flask import current_app, g

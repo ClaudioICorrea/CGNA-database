@@ -20,33 +20,47 @@ def _login():
 @bp.route("/", methods=["GET", "POST"])
 def search_genes():
     if request.method == "POST":
-        name_genes = request.form.get("name_genes")
+        querie = request.form.get("querie")
         specie = request.form.get("specie")
-        chromosome = request.form.get("chromosomes")
-        print(name_genes)
+        data=[]
         error = None
-        if not specie and not chromosome and not name_genes:
+        if not specie and not querie:
             error = "invalid query..."
         if error is not None:
             flash(error)
         else:
             db, c = get_db()
             id_specie = int(specie) if specie else None
-            id_chromosome = int(chromosome) if chromosome else None
+            querie = str(querie) if querie else None
             if g.user:
                 c.execute(
-                    "insert into queries (id_specie, id_chromosome, name_gen, created_by)"
-                    " values (%s,%s,%s,%s)",
-                    (id_specie, id_chromosome, name_genes, g.user["id"]),
+                    "INSERT INTO queries (id_specie, created_by,querie)"
+                    " VALUES (%s,%s,%s)",
+                    (id_specie, g.user["id"],querie),
                 )
             else:
                 c.execute(
-                    "insert into queries (id_specie, id_chromosome, name_gen, created_by)"
-                    " values (%s,%s,%s,%s)",
-                    (id_specie, id_chromosome, name_genes, 1),
+                    "INSERT INTO queries (id_specie, created_by , querie)"
+                    " VALUES (%s,%s,%s)",
+                    (id_specie,1,querie),
                 )
             db.commit()
-            return render_template("cgna_database/show_genes.html")
+            if querie is None:
+                querie =""
+                c.execute(
+                    'SELECT id_chromosome, gbig, number_genes, size, alias FROM chromosomes WHERE id_specie = %s',
+                (specie,) 
+                )
+                data = c.fetchall()
+                c.execute(
+                    'SELECT * FROM species WHERE id_specie = %s',
+                (specie,) 
+                )
+                specie = c.fetchall()
+                print(data)
+                print(specie)
+            
+            return render_template("cgna_database/show_genes.html", querie = querie, specie=specie, data=data)
     return redirect(url_for("cgna_database.index"))
 
 @bp.route("/show_genes", methods=["GET","POST"])

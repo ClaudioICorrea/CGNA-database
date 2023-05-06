@@ -7,17 +7,17 @@
     <div class='hero-content'>
         <h2>Search</h2>
         <form class='content-form' method='post' action='{{ url_for('cgna_database.search_genes')}}'> 
-            <input class = 'input full-width' name='name_genes' placeholder='ID gene or name..' />
-            <select class = 'select full-width' id="Opciones" name="specie" placeholder="specie">
+            <input class = 'input full-width' name='querie' placeholder='ID chromosome, name chromosome, ID gene or name gene..' />
+            <select class = 'select full-width' id="Opciones" name="specie" placeholder="specie" required>
                 <option value="">-</option>
-                <option value="1">Homo sapiens </option>
+                <option value="1"> Arabidopsis thaliana </option>
             </select>
 
-            <select class = 'select full-width' id="Opciones" name="chromosomes" placeholder="chromosomes">
+        <!--<select class = 'select full-width' id="Opciones" name="chromosomes" placeholder="chromosomes">
                     <option value="" >-</option>
                     <option value="1">chromosome 1</option>
                     <option value="2">chromosome 2</option>
-                    <option value="3">chromosome 3</option> </select>    
+                    <option value="3">chromosome 3</option> </select> -->   
             <button class = 'btn full-width'>Buscar</button>
         </form>
         <div class="content-form">  

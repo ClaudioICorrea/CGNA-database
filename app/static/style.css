@@ -170,6 +170,7 @@ a.btn {
     border: solid 1px #ddd;
     border-radius: 5px;
     padding: 20px 30px;
+    margin-bottom: 20px;
 }
 
 .four {
@@ -178,7 +179,7 @@ a.btn {
 }
 
 .footer {
-    margin-top: 400px;
+    margin-top: 0px;
     padding: 80px 0 0 0;
     background-color: #333;
     color: #fff;
@@ -192,6 +193,7 @@ a.btn {
 .login_box {
     width: 300px;
     margin-top: 20px;
+    margin-bottom: 20px;
     padding: 20px 20px 20px 20px;
     background-color: #fff;
     color: #034d6c;
@@ -230,4 +232,34 @@ a.btn {
     font-family: 'Rufina', sans-serif;
     font-size: 13px;
     color: #EC131B;
+}
+
+.sidebar {
+    background-color: #fff;
+    width: 200px;
+    height: 300vh;
+    color: #034d6c;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 10px;
+}
+
+.not-animation {
+    text-decoration: none;
+}
+
+.info-box {
+    width: 900px;
+    margin: 20px;
+    padding: 20px 20px 20px 20px;
+    background-color: #fff;
+    color: #034d6c;
+    border: solid 1px #ddd;
+    border-radius: 5px;
 }

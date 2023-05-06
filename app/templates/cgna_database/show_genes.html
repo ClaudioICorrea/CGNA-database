@@ -4,5 +4,26 @@
 {% endblock %}
 
 {% block content%}
-
+<div class = row > 
+    <div class = 'sidebar'>
+        <ul>
+            <li><a href="#">option_1</li>
+            <li><a href="#">option_2</li>
+            <li><a href="#">option_3</li>
+        </ul>
+    </div>
+    <div class='info-box'>
+        <div class='info-content row'>
+            <a href='#'><h2>{{querie}} {{specie[0]['specie']}}</h2></a>
+            <ul>
+                {% for dato in  data %}
+                    <li><a href="#"><h4>{{dato}}</h4></a></li>
+                    {% if not loop.last %}
+                        <hr>
+                    {% endif %}
+                {%  endfor %}
+            </ul>
+        </div> 
+    </div>
+</div>
 {% endblock%}

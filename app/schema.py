@@ -18,9 +18,7 @@ instructions = [
             id INT PRIMARY KEY AUTO_INCREMENT,
             created_by INT NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             id_specie INT,
-            id_chromosome INT,
-            id_genes INT,
-            name_gen VARCHAR(255),
+            querie VARCHAR(255),
             FOREIGN KEY (created_by) REFERENCES user (id)
         )
     """,
@@ -57,7 +55,6 @@ instructions = [
             FOREIGN KEY fk_id_chromosome(id_chromosome) REFERENCES chromosomes(id_chromosome)
         );
     """,
-    "INSERT INTO user (username,password) VALUES ('default_user','1234');"
-    ,
+    "INSERT INTO user (username,password) VALUES ('default_user','1234');",
     "INSERT INTO species (specie) VALUES ('Arabidopsis_thaliana');",
 ]

@@ -48,6 +48,7 @@ for line in content_ggf:
             (id_chromosome,1,0,size_chromosome,alias_chromosome,chromosome_seq)
         )
         zelda.commit()
+    #asignación de genes     
     result = re.search(r"ID=gene:(\w+);",line) 
     if result is not None:
         id_gene =  result.group(1)
