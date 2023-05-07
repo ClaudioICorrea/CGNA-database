@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}
+    show-genes
+{% endblock %}
+
+{% block content%}
+<div class = row > 
+    <div class = 'sidebar'>
+        <ul>
+            {% block option %}{% endblock %}
+        </ul>
+    </div>
+    <div class="info">
+        <div class='info-box'>
+            <div class='info-content row'>
+                {% block main_info %}{% endblock %}
+            </div> 
+        </div>
+        <div class= "info-footer">
+            <h1>hola</h1>
+        </div>
+    </div>
+    
+</div>
+{% endblock%}

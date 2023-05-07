@@ -1,0 +1,17 @@
+{% extends 'show_info.html' %}
+
+{% block main_info %}
+<a href='#'><h2>{{querie}} {{specie[0]['specie']}}</h2></a>
+            <ul>
+                {% for dato in  data %}
+                    <li><a href="#"><h4>{{dato}}</h4></a></li>
+                    {% if not loop.last %}
+                        <hr>
+                    {% endif %}
+                {%  endfor %}
+            </ul>
+{% endblock %}
+
+
+
+<!---->
