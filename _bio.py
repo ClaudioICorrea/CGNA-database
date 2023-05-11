@@ -55,7 +55,7 @@ for line in content_ggf:
         line_aux=line.split()
         fk_id_chromosome= line_aux[0]
         source_gene = line_aux[1]
-        bio_type = line_aux[2]
+        gene_type = line_aux[2]
         start_gene =line_aux[3]
         end_gene =line_aux[4]
         score_gene = line_aux[5]
@@ -67,10 +67,15 @@ for line in content_ggf:
             aux = re.search(r"logic_name=(\w+)",description_gene) 
             name_gene = aux.group(1)
         else:
-            name_gene = None    
+            name_gene = None  
+        if re.search(r"biotype=",description_gene) is not None:
+            aux = re.search(r"biotype=(\w+)",description_gene) 
+            bio_type = aux.group(1)
+        else:
+            bio_type = None        
         link.execute(
-            "INSERT INTO genes (id_genes,id_chromosome,bio_type,start,end,score,strand,frame,size,name_gen) values (%s, %s,%s,%s,%s,%s, %s,%s,%s,%s)",
-            (id_gene,fk_id_chromosome,bio_type,start_gene,end_gene,score_gene,strand_gene,frame_gene,size_gene,name_gene)
+            "INSERT INTO genes (id_genes,id_chromosome,gene_type,start,end,score,strand,frame,size,name_gen, bio_type) values (%s, %s,%s,%s,%s,%s, %s,%s,%s,%s,%s)",
+            (id_gene,fk_id_chromosome,gene_type,start_gene,end_gene,score_gene,strand_gene,frame_gene,size_gene,name_gene,bio_type)
         )
         
 link.close()

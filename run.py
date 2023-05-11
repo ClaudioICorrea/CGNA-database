@@ -32,7 +32,7 @@ def run_flask():
     # . venv/Scripts/activate
     # pip install Flask
 
-    print("start database")
+    print("update database")
     subprocess.call(["python", "_bio.py"])
     print("start APP as development..")
     os.environ["FLASK_DEBUG"] = "on"

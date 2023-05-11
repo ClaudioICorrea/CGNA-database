@@ -20,6 +20,10 @@ a:hover {
     color: #EC131B;
 }
 
+.menu li:hover .submenu {
+    display: block;
+}
+
 html body header {
     position: relative;
     z-index: 2;
@@ -27,7 +31,7 @@ html body header {
     justify-content: space-between;
     background-color: #fff;
     box-shadow: 3px 0 5px #aaa;
-    padding: 15px 30px;
+    padding: 10px 30px;
 }
 
 header .logo {
@@ -38,17 +42,49 @@ header .logo {
     font-weight: 700;
 }
 
-html body nav ul {
+.menu {
     list-style: none;
     font-size: 16px;
 }
 
-html body nav ul li {
+.menu>li {
     display: inline-block;
+    position: relative;
 }
 
+.menu>li>a {
+    display: block;
+}
 
-html body nav ul li a {
+.submenu {
+    position: absolute;
+    background-color: #aaa;
+    width: 200%;
+    padding: 2px;
+    display: none;
+    margin-top: 20px;
+}
+
+.aline-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.submenu li {
+    text-decoration: none;
+    list-style: none;
+    margin-top: 0px;
+    padding: 0px;
+}
+
+.submenu li a {
+    text-decoration: none;
+    display: block;
+    padding: 15px;
+    color: #fff;
+}
+
+.menu li a {
     padding: 0 15px;
 }
 
@@ -237,7 +273,6 @@ a.btn {
 .sidebar {
     background-color: #fff;
     width: 200px;
-    height: 300vh;
     color: #034d6c;
 }
 
@@ -256,11 +291,59 @@ a.btn {
 
 .info-box {
     width: 900px;
-    height: 300px;
     margin: 20px;
     padding: 20px 20px 20px 20px;
     background-color: #fff;
     color: #034d6c;
     border: solid 1px #ddd;
     border-radius: 5px;
+}
+
+.info-list ul {
+    list-style: none;
+}
+
+
+.info-list ul li h4 {
+    margin: 4px;
+}
+
+.info-footer {
+    margin-left: 20px;
+    width: 1000px;
+}
+
+.tabla-cont {
+    max-height: 300px;
+    border: solid 1px #ccc;
+    /* Establece la altura máxima del contenedor */
+    overflow-y: auto;
+    margin-bottom: 10px;
+    /* Agrega una barra de desplazamiento vertical cuando sea necesario */
+}
+
+.tabla-cont thead {
+    background-color: #bbbbbb;
+    position: sticky;
+    top: 0px;
+
+}
+
+
+
+.tabla-cont table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tabla-cont table tbody tr {
+    background-color: #f2f2f2;
+}
+
+.tabla-cont table tbody tr:nth-child(2n) {
+    background-color: #cbcbcb;
+}
+
+.tabla-cont th h4 {
+    margin: 5px;
 }

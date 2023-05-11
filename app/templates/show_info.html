@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-    show-genes
+    show-querie
 {% endblock %}
 
 {% block content%}
@@ -17,9 +17,13 @@
             </div> 
         </div>
         <div class= "info-footer">
-            <h1>hola</h1>
+            {% block info_footer %}{% endblock %}
         </div>
     </div>
     
 </div>
+
+
+
+
 {% endblock%}

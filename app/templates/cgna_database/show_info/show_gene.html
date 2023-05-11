@@ -1,0 +1,17 @@
+{% extends 'show_info.html' %}
+
+{% block main_info %}
+<div class ="column">
+    <a href='#'><h2>{{querie}}</h2></a>   
+    <div class="info-list">
+        <ul>
+            <li><h2>Gene-id:{{data_genes[0]['id_genes']}}, bio_type:{{data_genes[0]['bio_type']}}</h2></li>
+            <li><h4>Chromosome: {{data_genes[0]['id_chromosome']}} </h4></li>
+            <li><h4>Organims: {{specie}} </h4></li>
+            <li><h4>Size: {{data_genes[0]['size']}} </h4></li>
+            <li><h4>[start - end]: [{{data_genes[0]['start']}}-{{data_genes[0]['end']}}] </h4></li>
+        </ul>
+    </div>
+</div> 
+
+{% endblock %}
