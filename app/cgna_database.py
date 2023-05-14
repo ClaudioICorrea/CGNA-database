@@ -1,7 +1,8 @@
-from flask import ( Blueprint, render_template, request, redirect, url_for, current_app, g, flash,
+from flask import ( Blueprint, render_template, request, redirect, url_for, current_app, g, flash, jsonify
 )
-
+import json
 bp = Blueprint("cgna_database", __name__, url_prefix="/")
+
 
 from werkzeug.exceptions import abort
 from app.db import get_db
@@ -58,14 +59,30 @@ def click_gene(where_is,id_genes):
     # Lógica de la función click_gene()
     return show_genes(where_is,id_querie,querie,c,db) ## show_genes(where_is,id_querie,querie,c,db)
 
-@bp.route('/filter', methods =["POST"])
-def filter():
-    condicion=request.form.get('condicion')
-    print(condicion)
-    return '' #render_template("cgna_database/show_info/show_chromosome.html")''
+@bp.route('/data_genes/<id_chromosome>/', methods=["GET"])
+def data_genes(id_chromosome):
+    db, c = get_db()
+    c.execute(
+            'SELECT id_genes, bio_type, gene_type,size FROM genes WHERE id_chromosome = %s',
+                 (id_chromosome,)
+        )
+    data_genes = c.fetchall()  
+    return jsonify({"datos":data_genes})
+
+
+@bp.route('/filter/<where_is>/<id_querie>', methods =["POST"])
+def filter(where_is,id_querie):
+    querie= id_querie
+    print (where_is,id_querie)
+    db, c = get_db()
+    #condicion=request.form.get('condicion')
+    #print(condicion)
+    filter=[]
+    return show_genes(where_is,id_querie,querie,c,db,filter)
 @bp.route("/show_genes", methods=["GET"])
 def show_genes(where_is,id_querie,querie,c,db,filter=[]):
     if where_is == "chromosomes":
+        print('done !')
         c.execute(
             'SELECT id_chromosome, gbig, number_genes, size, alias, id_specie FROM chromosomes WHERE id_chromosome = %s',
                 (id_querie,)
@@ -76,11 +93,13 @@ def show_genes(where_is,id_querie,querie,c,db,filter=[]):
                 (data_chromosome[0]['id_specie'],)
         )
         specie = c.fetchall()[0]['specie'] 
+        ### datos para tabla ###
         c.execute(
             'SELECT id_genes, bio_type, gene_type,size FROM genes WHERE id_chromosome = %s',
                  (id_querie,)
         )
         data_genes = c.fetchall()  
+        print(data_genes)
         return render_template("cgna_database/show_info/show_chromosome.html",specie = specie,querie = querie, data_chromosome=data_chromosome, data_genes = data_genes, c=c, db=db)
     elif where_is == "genes":
         c.execute(

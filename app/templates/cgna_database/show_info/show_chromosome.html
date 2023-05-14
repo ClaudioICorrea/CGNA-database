@@ -33,24 +33,30 @@
     </div>
     <form class="table-DB" method='post' action="{{ url_for('cgna_database.donwload_genes')}}">
         <div class = "tabla-cont">
-            <table>
+            <table id= "data_table">
                 <thead>
-                    <tr><th></th> <th>id genes </th> <th> size </th> <th> type </th> <th> bio_type </th></tr>
+                    <tr>
+                        <!--<th></th>-->
+                        <th> id_genes</th>
+                        <th> size</th>
+                        <th> type </th>
+                        <th> bio_type </th>
+                    </tr>
                 </thead>
                 <tbody>    
-                    {% for dato in  data_genes %}
+                    <!--{% for dato in  data_genes %}-->
                     <tr>
-                        <th><input type="checkbox" name = "id_genes" value="{{dato['id_genes']}}"></th>
+                        <!--<th><input type="checkbox" name = "id_genes" value="{{dato['id_genes']}}"></th>
                         <th><a href="{{ url_for('cgna_database.click_gene', where_is='genes', id_genes = dato['id_genes']) }}">{{dato['id_genes']}}</a></th>
                         <th>{{dato['size']}}</th>
                         <th> {{dato['gene_type']}}</th>
-                        <th> {{dato['bio_type']}}</h4></th>
+                        <th> {{dato['bio_type']}}</h4></th>-->
                     </tr>
-                    {%  endfor %}
+                    <!--{%  endfor %}-->
                 </tbody>
             </table>      
         </div>
-        <label>
+        <!--<label>
             <input type="radio" name="Format" value="fasta">
             Fasta
         </label>
@@ -58,21 +64,68 @@
             <input type="radio" name="Format" value="gff3">
             GFF3
         </label>
-        <button type="submit" > Download file </button>
+        <button type="submit" > Download file </button>-->
     </form> 
 </div>
+<!--<script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
 
-<!--<form method="POST" action="{{ url_for('cgna_database.filter')}}">
+<!--<link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">-->
+
+<!--
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>-->
+
+
+<!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+<!--<link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">-->
+
+
+<script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src= "https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src= "https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+
+<script>
+    let dataTable;
+    $(function(){
+
+        $.ajax({
+            url:'/data_genes/{{data_chromosome[0]['id_chromosome']}}/',
+            type:"GET",
+            success: function(response){
+                console.log("data_genes:",response)
+                $('#data_table').DataTable({
+                    pageLenght:10,
+                    data:response["datos"],
+                    "columns":[ 
+                        {"data":"id_genes"},
+                        {"data":"size"},
+                        {"data":"gene_type"},
+                        {"data":"bio_type"}
+                    ]
+                })
+            }
+        })
+
+    })
+</script>
+
+
+
+
+<form method="POST" action="{{ url_for('cgna_database.filter', where_is='chromosomes', id_querie = data_chromosome[0]['id_chromosome'])}}">
     <input type="checkbox" name="condicion">
     <button type="submit">Enviar</button>
   </form>
-  
+<!--
   {% if condicion %}
     <p>El checkbox ha sido seleccionado.</p>
   {% else %}
     <p>El checkbox no ha sido seleccionado.</p>
   {% endif %}
--->
+
   <form id="myForm">
     <input type="checkbox" id="condicion">
     <button type="submit">Enviar</button>
@@ -94,7 +147,7 @@
         }
     });
 </script>
-
+-->
 
 {% endblock%}
 
