@@ -23,39 +23,21 @@
 <div class ='info-list'>
     <h1>Genes </h1>
     <hr>
-    <div class= "function-table"> 
-        <div class="filter">
-           <a href = "#"> filter </a>
-            <form class="filter" >
-                <input type="checkbox">
-            </form> 
-        </div>
-    </div>
-    <form class="table-DB" method='post' action="{{ url_for('cgna_database.donwload_genes')}}">
-        <div class = "tabla-cont">
-            <table id= "data_table">
-                <thead>
-                    <tr>
+    <div class= "function-table"> </div>
+        <form class="table-DB" method='post' action="{{ url_for('cgna_database.donwload_genes')}}">
+            <div class = "tabla-cont">
+                <table id= "data_table">
+                    <thead>
+                        <tr>
                         <!--<th></th>-->
-                        <th> id_genes</th>
-                        <th> size</th>
-                        <th> type </th>
-                        <th> bio_type </th>
-                    </tr>
-                </thead>
-                <tbody>    
-                    <!--{% for dato in  data_genes %}-->
-                    <tr>
-                        <!--<th><input type="checkbox" name = "id_genes" value="{{dato['id_genes']}}"></th>
-                        <th><a href="{{ url_for('cgna_database.click_gene', where_is='genes', id_genes = dato['id_genes']) }}">{{dato['id_genes']}}</a></th>
-                        <th>{{dato['size']}}</th>
-                        <th> {{dato['gene_type']}}</th>
-                        <th> {{dato['bio_type']}}</h4></th>-->
-                    </tr>
-                    <!--{%  endfor %}-->
-                </tbody>
-            </table>      
-        </div>
+                            <th> id_genes</th>
+                            <th> size</th>
+                            <th> type </th>
+                            <th> bio_type </th>
+                        </tr>
+                    </thead>
+                </table>      
+            </div>
         <!--<label>
             <input type="radio" name="Format" value="fasta">
             Fasta
@@ -65,30 +47,9 @@
             GFF3
         </label>
         <button type="submit" > Download file </button>-->
-    </form> 
+        </form> 
 </div>
-<!--<script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-
-<!--<link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">-->
-
-<!--
-<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>-->
-
-
-<!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
-<!--<link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">-->
-
-
-<script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src= "https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src= "https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
-
 <script>
-    let dataTable;
     $(function(){
 
         $.ajax({
@@ -100,7 +61,11 @@
                     pageLenght:10,
                     data:response["datos"],
                     "columns":[ 
-                        {"data":"id_genes"},
+                        {"data":"id_genes",
+                        render: function (data) {
+                            return '<a href="/click_gene/genes/' + data + '">' + data + '</a>';
+                        }
+                        },
                         {"data":"size"},
                         {"data":"gene_type"},
                         {"data":"bio_type"}
@@ -112,42 +77,15 @@
     })
 </script>
 
-
-
-
-<form method="POST" action="{{ url_for('cgna_database.filter', where_is='chromosomes', id_querie = data_chromosome[0]['id_chromosome'])}}">
-    <input type="checkbox" name="condicion">
-    <button type="submit">Enviar</button>
-  </form>
-<!--
-  {% if condicion %}
-    <p>El checkbox ha sido seleccionado.</p>
-  {% else %}
-    <p>El checkbox no ha sido seleccionado.</p>
-  {% endif %}
-
-  <form id="myForm">
-    <input type="checkbox" id="condicion">
-    <button type="submit">Enviar</button>
-</form>
-
-<p id="resultado"></p>
-
-<script>
-    document.getElementById('myForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevenir el comportamiento predeterminado del formulario (recargar la página)
-
-        var checkbox = document.getElementById('condicion');
-        var resultado = document.getElementById('resultado');
-
-        if (checkbox.checked) {
-            resultado.textContent = 'El checkbox ha sido seleccionado.';
-        } else {
-            resultado.textContent = 'El checkbox no ha sido seleccionado.';
-        }
-    });
-</script>
+<h1>Sequence</h1>
+<hr>
+<!--<div class = "sequence">
+    <p class= "line-break" >{{data_chromosome[0]['sequence']}}</p>
+</div>
 -->
+
+
+
 
 {% endblock%}
 

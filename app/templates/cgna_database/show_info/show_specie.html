@@ -1,37 +1,74 @@
 {% extends 'show_info.html' %}
 
 {% block option %}
-    <li><a href="#" > option 1</a></li>
-    <li><a href="#" > option 2</a></li>
-    <li><a href="#" > option 3</a></li>
+    <li><a href="#" > Chromosomes</a></li>
 {% endblock %}
 
 
 {% block main_info %}
-<a href='#'><h2>{{querie}} {{specie[0]['specie']}}</h2></a>
-<div class ='info-list'>
-    <ul>
-        {% for dato in  data %}
-            <li><a href="#"><h4>{{dato['id_chromosome']}};{{dato['alias']}}</h4></a></li>
-        {%  endfor %}
-    </ul>
+<div class = "right" >
+    <a href='#'><h2>{{querie}} {{specie[0]['specie']}}</h2></a>
+    <img src="{{url_for('static', filename='Arabidopsis_thaliana.jpg')}}" width=250px/>
+</div>
+<div class ='left'>
+    <p>
+        Arabidopsis thaliana es una pequeña planta de flores blancas que pertenece a la familia de las brasicáceas, nativa de Europa y Asia occidental. Aunque puede parecer una planta común, ha adquirido una gran importancia en el campo de la biología vegetal y la genética.
+    </p>
+    <p>
+    Esta planta se ha convertido en el organismo modelo preferido para la investigación científica en biología vegetal debido a varias características notables. En primer lugar, Arabidopsis thaliana tiene un ciclo de vida corto, lo que permite que los científicos realicen experimentos y obtengan resultados rápidamente. Además, su tamaño compacto y su facilidad para crecer en el laboratorio facilitan su manipulación y estudio.
+    </p>
 </div>
             
 {% endblock %}
 
 {% block info_footer%}
-<p>
-    Arabidopsis thaliana es una pequeña planta de flores blancas que pertenece a la familia de las brasicáceas, nativa de Europa y Asia occidental. Aunque puede parecer una planta común, ha adquirido una gran importancia en el campo de la biología vegetal y la genética.
-</p>
-<p>
-Esta planta se ha convertido en el organismo modelo preferido para la investigación científica en biología vegetal debido a varias características notables. En primer lugar, Arabidopsis thaliana tiene un ciclo de vida corto, lo que permite que los científicos realicen experimentos y obtengan resultados rápidamente. Además, su tamaño compacto y su facilidad para crecer en el laboratorio facilitan su manipulación y estudio.
-</p>
-<p>
-Uno de los aspectos más destacados de Arabidopsis thaliana es su genoma. A diferencia de otros organismos más complejos, el genoma de Arabidopsis es relativamente pequeño y se ha secuenciado por completo. Esto significa que los científicos tienen acceso a la secuencia completa de su ADN, lo que les permite investigar en detalle los mecanismos moleculares que regulan el crecimiento, desarrollo y respuesta a diferentes estímulos en las plantas.
-</p>
-<p>
-Gracias a su genoma secuenciado, Arabidopsis thaliana se ha utilizado como una plataforma para el estudio de la función de los genes. Los científicos pueden modificar genéticamente la planta para silenciar o sobreexpresar genes específicos y luego observar los efectos en su fenotipo. Esto ha permitido descubrir funciones clave de muchos genes en procesos biológicos como la fotosíntesis, la respuesta a enfermedades y la resistencia a condiciones ambientales adversas. 
-</p>
+<div class ='info-list'>
+    <h1>Chromosomes </h1>
+    <hr>
+    <div class = "tabla-cont">
+        <table id= "data_table">
+            <thead>
+                <tr>
+                    <th> id_chromosome</th>
+                    <th> number_genes</th>
+                    <th> size </th>
+                    <th> gbig </th>
+                    <th> alias </th>
+                </tr>
+            </thead>
+        </table>      
+    </div>
+
+    <script>
+        $(function(){
+    
+            $.ajax({
+                url:'/data_chromosomes/{{specie[0]['id_specie']}}/',
+                type:"GET",
+                success: function(response){
+                    console.log("data_genes:",response)
+                    $('#data_table').DataTable({
+                        pageLenght:10,
+                        data:response["datos"],
+                        "columns":[ 
+                            {"data":"id_chromosome",
+                            render: function (data) {
+                                return '<a href="/click_gene/chromosomes/' + data + '">' + data + '</a>';
+                            }
+                            },
+                            {"data":"number_genes"},
+                            {"data":"size"},
+                            {"data":"gbig"},
+                            {"data":"alias"}
+                        ]
+                    })
+                }
+            })
+    
+        })
+    </script>
+</div>
+
 {%endblock%}
 
 

@@ -1,5 +1,5 @@
 html {
-    font-family: 'Rufina', sans-serif;
+    font-family: sans-serif;
 }
 
 body {
@@ -151,7 +151,12 @@ header .logo {
 }
 
 .left {
-    width: 600px;
+    margin-left: 20px;
+    align-self: center;
+}
+
+.right {
+    margin-left: 20px;
     align-self: center;
 }
 
@@ -314,8 +319,6 @@ a.btn {
 }
 
 .tabla-cont {
-    max-height: 300px;
-    border: solid 1px #ccc;
     /* Establece la altura máxima del contenedor */
     overflow-y: auto;
     margin-bottom: 10px;
@@ -329,11 +332,25 @@ a.btn {
 
 }
 
+.dataTables_length {
+    margin-bottom: 10px;
+    float: left;
+}
 
+.dataTables_filter {
+    margin-bottom: 10px;
+    float: right;
+}
 
 .tabla-cont table {
     border-collapse: collapse;
     width: 100%;
+}
+
+
+
+.tabla-cont table tbody tr td {
+    font-family: 'Rubik';
 }
 
 .tabla-cont table tbody tr {
@@ -344,6 +361,16 @@ a.btn {
     background-color: #cbcbcb;
 }
 
+
 .tabla-cont th h4 {
+    display: center;
     margin: 5px;
+}
+
+.sequence {
+    width: 1000px;
+}
+
+.line-break {
+    word-wrap: break-word;
 }

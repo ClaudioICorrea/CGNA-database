@@ -15,3 +15,125 @@
 </div> 
 
 {% endblock %}
+
+
+{% block info_footer %}
+<div class ='info-list'>
+    <h1>Transcripts</h1>
+    <hr>
+    <div class= "function-table"> </div>
+        <form class="table-DB" method='post' action="{{ url_for('cgna_database.donwload_genes')}}">
+            <div class = "tabla-cont">
+                <table id= "data_table">
+                    <thead>
+                        <tr>
+                        <!--<th></th>-->
+                            <th> id_transcript</th>
+                            <th> size</th>
+                            <th> name_transcript </th>
+                            <th> bio_type </th>
+                        </tr>
+                    </thead>
+                </table>      
+            </div>
+        <!--<label>
+            <input type="radio" name="Format" value="fasta">
+            Fasta
+        </label>
+        <label>
+            <input type="radio" name="Format" value="gff3">
+            GFF3
+        </label>
+        <button type="submit" > Download file </button>-->
+        </form> 
+</div>
+
+<h1>Sequence</h1>
+<hr>
+<script>
+    $(function(){
+
+        $.ajax({
+            url:'/data_transcript/{{data_genes[0]['id_genes']}}/',
+            type:"GET",
+            success: function(response){
+                console.log("data_genes:",response)
+                $('#data_table').DataTable({
+                    data:response["datos"],
+                    "columns":[ 
+                        {"data":"id_transcript",
+                        render: function (data) {
+                            return '<a href="/click_gene/genes/' + data + '">' + data + '</a>';
+                        }
+                        },
+                        {"data":"size"},
+                        {"data":"name_transcript"},
+                        {"data":"bio_type"}
+                    ]
+                })
+            }
+        })
+
+    })
+</script>
+
+
+
+{% endblock %}
+<div class ='info-list'>
+    <h1>Genes </h1>
+    <hr>
+    <div class= "function-table"> </div>
+        <form class="table-DB" method='post' action="{{ url_for('cgna_database.donwload_genes')}}">
+            <div class = "tabla-cont">
+                <table id= "data_table">
+                    <thead>
+                        <tr>
+                        <!--<th></th>-->
+                            <th> id_genes</th>
+                            <th> size</th>
+                            <th> type </th>
+                            <th> bio_type </th>
+                        </tr>
+                    </thead>
+                </table>      
+            </div>
+        <!--<label>
+            <input type="radio" name="Format" value="fasta">
+            Fasta
+        </label>
+        <label>
+            <input type="radio" name="Format" value="gff3">
+            GFF3
+        </label>
+        <button type="submit" > Download file </button>-->
+        </form> 
+</div>
+
+<script>
+    $(function(){
+
+        $.ajax({
+            url:'/data_genes/{{data_chromosome[0]['id_chromosome']}}/',
+            type:"GET",
+            success: function(response){
+                console.log("data_genes:",response)
+                $('#data_table').DataTable({
+                    pageLenght:10,
+                    data:response["datos"],
+                    "columns":[ 
+                        {"data":"id_genes",
+                        render: function (data) {
+                            return '<a href="/click_gene/genes/' + data + '">' + data + '</a>';
+                        }
+                        },
+                        {"data":"size"},
+                        {"data":"gene_type"},
+                        {"data":"bio_type"}
+                    ]
+                })
+            }
+        })
+
+    })
+</script>

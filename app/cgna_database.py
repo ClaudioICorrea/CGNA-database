@@ -54,37 +54,50 @@ def search_database(id_specie,querie,c,db):
 def click_gene(where_is,id_genes):
     db, c = get_db()
     id_querie = querie = id_genes
-    
-    print(where_is,id_genes)
     # Lógica de la función click_gene()
     return show_genes(where_is,id_querie,querie,c,db) ## show_genes(where_is,id_querie,querie,c,db)
+
+@bp.route('/data_chromosomes/<id_specie>/', methods=["GET"])
+def data_chromosomes(id_specie):
+    db, c = get_db()
+    c.execute(
+            'SELECT id_chromosome, gbig, number_genes, size, alias,sequence FROM chromosomes WHERE id_specie = %s',
+            (id_specie,) 
+        )
+    id_specie = c.fetchall()  
+    return jsonify({"datos":id_specie})
+
+
 
 @bp.route('/data_genes/<id_chromosome>/', methods=["GET"])
 def data_genes(id_chromosome):
     db, c = get_db()
     c.execute(
-            'SELECT id_genes, bio_type, gene_type,size FROM genes WHERE id_chromosome = %s',
+            'SELECT id_genes, bio_type, gene_type,size, number_transcript FROM genes WHERE id_chromosome = %s',
                  (id_chromosome,)
         )
     data_genes = c.fetchall()  
     return jsonify({"datos":data_genes})
 
-
-@bp.route('/filter/<where_is>/<id_querie>', methods =["POST"])
-def filter(where_is,id_querie):
-    querie= id_querie
-    print (where_is,id_querie)
+@bp.route('/data_transcript/<id_genes>/', methods=["GET"])
+def data_transcripts(id_genes):
     db, c = get_db()
-    #condicion=request.form.get('condicion')
-    #print(condicion)
-    filter=[]
-    return show_genes(where_is,id_querie,querie,c,db,filter)
+    c.execute(
+            'SELECT id_transcript, bio_type,size, name_transcript,sequence FROM transcripts WHERE id_genes = %s',
+                 (id_genes,)
+        )
+    data_transcripts = c.fetchall()  
+    return jsonify({"datos":data_transcripts})
+
+
+
 @bp.route("/show_genes", methods=["GET"])
 def show_genes(where_is,id_querie,querie,c,db,filter=[]):
-    if where_is == "chromosomes":
-        print('done !')
+    if where_is == "specie":
+        render_template("cgna_database/show_info/show_specie.html", querie = querie, specie=specie, data=data) ### pendiente !!
+    elif where_is == "chromosomes":
         c.execute(
-            'SELECT id_chromosome, gbig, number_genes, size, alias, id_specie FROM chromosomes WHERE id_chromosome = %s',
+            'SELECT id_chromosome, gbig, number_genes, size, alias, id_specie,sequence FROM chromosomes WHERE id_chromosome = %s',
                 (id_querie,)
         )  
         data_chromosome = c.fetchall()   
@@ -93,14 +106,8 @@ def show_genes(where_is,id_querie,querie,c,db,filter=[]):
                 (data_chromosome[0]['id_specie'],)
         )
         specie = c.fetchall()[0]['specie'] 
-        ### datos para tabla ###
-        c.execute(
-            'SELECT id_genes, bio_type, gene_type,size FROM genes WHERE id_chromosome = %s',
-                 (id_querie,)
-        )
-        data_genes = c.fetchall()  
-        print(data_genes)
-        return render_template("cgna_database/show_info/show_chromosome.html",specie = specie,querie = querie, data_chromosome=data_chromosome, data_genes = data_genes, c=c, db=db)
+
+        return render_template("cgna_database/show_info/show_chromosome.html",specie = specie,querie = querie, data_chromosome=data_chromosome, c=c, db=db)
     elif where_is == "genes":
         c.execute(
             'SELECT id_genes, id_chromosome, gene_type, start, end, score, strand, frame, size, name_gen, bio_type FROM genes WHERE id_genes = %s',
